@@ -12,7 +12,7 @@ public class CarTransport extends CommonBaseCar {
     @Override
     public void move() {
         double radians = Math.toRadians(direction);
-        double newX = currentSpeed * Math.sin(radians); //kolla
+        double newX = currentSpeed * Math.sin(radians);
         double newY = currentSpeed * Math.cos(radians);
 
         xPosition += newX;
