@@ -34,22 +34,4 @@ public class Scania extends CommonBaseCar {
             return false;
         }
     }
-
-    @Override
-    public void startEngine() {
-        if (isFlapDown()) {
-            super.startEngine();
-        } else {
-            System.err.println("You can't start the truck while trailer is open");
-        }
-    }
-
-    @Override
-    public void gas(double amount) {
-        if (isFlapDown()) {
-            super.gas(amount);
-        } else {
-            System.err.println("You can't move while trailer is open");
-        }
-    }
 }

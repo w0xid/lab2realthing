@@ -6,7 +6,7 @@ public class CarTransport extends CommonBaseCar {
 
     private double loadingRadius = 14;
     private boolean rampUp;
-    private ArrayList carsLoaded = new ArrayList<CommonBaseCar>();
+    private ArrayList<CommonBaseCar> carsLoaded = new ArrayList<>();
     private final int maxCars = 6;
 
     @Override
@@ -20,7 +20,7 @@ public class CarTransport extends CommonBaseCar {
 
         if (!carsLoaded.isEmpty()) {
             for (int i = 0; i < carsLoaded.size(); i++) {
-                CommonBaseCar car = (CommonBaseCar) carsLoaded.get(i);
+                CommonBaseCar car = carsLoaded.get(i);
                 car.xPosition = xPosition;
                 car.yPosition = yPosition;
             }
@@ -31,7 +31,6 @@ public class CarTransport extends CommonBaseCar {
         super(2, Color.blue, 220, "carTransport", 0.0, 0.0, 0.0);
         rampUp = true;
     }
-
 
     private boolean isRampUp() {
         return rampUp;
@@ -65,14 +64,14 @@ public class CarTransport extends CommonBaseCar {
                 System.err.println("CarTransport cannot load car");
             }
         } else {
-            System.err.println(("CarTransport cannot load another carTransport"));
+            System.err.println("CarTransport cannot load another carTransport");
         }
     }
 
     public void unloadCar() {
         int lastCar = carsLoaded.size() - 1;
         if (!isRampUp() && getCurrentSpeed() == 0 && !carsLoaded.isEmpty()) {
-            CommonBaseCar unloadedCar = (CommonBaseCar) carsLoaded.remove(lastCar);
+            CommonBaseCar unloadedCar = carsLoaded.remove(lastCar);
             unloadedCar.yPosition = unloadedCar.getYPosition() - 18;
         } else {
             System.err.println("Cannot unload car");

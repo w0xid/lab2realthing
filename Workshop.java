@@ -1,18 +1,25 @@
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class Garage<T extends CommonBaseCar> {
+public class Workshop<T extends CommonBaseCar> {
 
     private int maxCars;
-    private ArrayList<T> cars;
+    private ArrayList<T> cars = new ArrayList<>();
 
-    public Garage(T garage) {;
+    public Workshop(int maxCars) {;
         this.maxCars = maxCars;
     }
 
+    public int getCarsAmount() {
+        if (cars.size() <= maxCars) {
+            return cars.size();
+        } else {
+            return maxCars;
+        }
+    }
+
     public void receiveCar(T car) {
-        if (cars.size() < maxCars && isCorrectCar(car)) {
+        if (cars.size() < maxCars) {
             cars.add(car);
         } else {
             System.err.println("Cannot receive car");
@@ -28,13 +35,8 @@ public class Garage<T extends CommonBaseCar> {
             return Optional.empty();
         }
     }
-
-    public boolean isCorrectCar(T car) {
-       /* // ???
-        if (car instanceof Volvo240) {
-            (????????)
-        }*/
-
-        return true;
-    }
 }
+
+
+//  Composition (plattform, ramp osv), generell klass lastbil / personbil..
+

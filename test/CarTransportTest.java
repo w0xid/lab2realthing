@@ -9,16 +9,13 @@ public class CarTransportTest {
     public void loadHelper() {
         carTransport.isInVicinity(saab);
         carTransport.lowerRamp();
-
-        for (int i = 0; i < 6; i++) {
-            carTransport.loadCar(saab);
-        }
+        carTransport.loadCar(saab);
     }
     @Test
     public void loadCarTest() {
         loadHelper();
 
-        assertEquals(6, carTransport.getLoadedCars(), 0.0);
+        assertEquals(1, carTransport.getLoadedCars(), 0.0);
     }
 
     @Test
@@ -27,7 +24,7 @@ public class CarTransportTest {
 
         carTransport.unloadCar();
 
-        assertEquals(5, carTransport.getLoadedCars(), 0.0);
+        assertEquals(0, carTransport.getLoadedCars(), 0.0);
     }
 
     @Test

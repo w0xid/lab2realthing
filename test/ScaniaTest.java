@@ -12,7 +12,7 @@ public class ScaniaTest {
         for (int i = 0; i < 4; i++) {
             scania.raiseFlap();
         }
-        double expectedFlapAngle = 40;
+        int expectedFlapAngle = 40;
         assertEquals(expectedFlapAngle, scania.getFlapAngle(), 0);
     }
 
