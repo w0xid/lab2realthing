@@ -2,49 +2,37 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class CarTransport extends CommonBaseCar {
+public class CarTransport extends CommonBaseCar implements Flap {
 
+    private GeneralFlap flap;
     private double loadingRadius = 14;
-    private boolean rampUp;
+    private boolean flapUp;
     private ArrayList<CommonBaseCar> carsLoaded = new ArrayList<>();
     private final int maxCars = 6;
 
-    @Override
-    public void move() {
-        double radians = Math.toRadians(direction);
-        double newX = currentSpeed * Math.sin(radians);
-        double newY = currentSpeed * Math.cos(radians);
-
-        xPosition += newX;
-        yPosition += newY;
-
-        if (!carsLoaded.isEmpty()) {
-            for (int i = 0; i < carsLoaded.size(); i++) {
-                CommonBaseCar car = carsLoaded.get(i);
-                car.xPosition = xPosition;
-                car.yPosition = yPosition;
-            }
-        }
-    }
-
     public CarTransport() {
         super(2, Color.blue, 220, "carTransport", 0.0, 0.0, 0.0);
-        rampUp = true;
+        this.flap = new GeneralFlap(90);
+        this.flapUp = true;
     }
 
     private boolean isRampUp() {
-        return rampUp;
+        return flapUp;
     }
 
-    public void raiseRamp() {
+    public double getFlapAngle() {
+        return flap.getFlapAngle();
+    }
+
+    public void raiseFlap() {
         if (getCurrentSpeed() == 0) {
-            rampUp = true;
+            flap.raiseToMax();
         }
     }
 
-    public void lowerRamp() {
-        if (getCurrentSpeed() == 0){
-            rampUp = false;
+    public void lowerFlap() {
+        if (getCurrentSpeed() == 0) {
+            flap.lowerToMin();
         }
     }
 
@@ -57,7 +45,7 @@ public class CarTransport extends CommonBaseCar {
     }
 
     public void loadCar(CommonBaseCar car) {
-        if (!Objects.equals(car.modelName, "carTransport")) {
+        if (car instanceof Flap) {
             if (isInVicinity(car) && !isRampUp() && getCurrentSpeed() == 0 && carsLoaded.size() < maxCars) {
                 carsLoaded.add(car);
             } else {

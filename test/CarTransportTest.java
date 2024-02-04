@@ -30,7 +30,7 @@ public class CarTransportTest {
     @Test
     public void loadedCarPositionWhileMoving() {
         loadHelper();
-        carTransport.raiseRamp();
+        carTransport.raiseFlap();
 
         carTransport.direction = 45;
         carTransport.currentSpeed = 10;

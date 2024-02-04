@@ -1,37 +1,39 @@
 import java.awt.*;
 
-public class Scania extends CommonBaseCar {
+public class Scania extends CommonBaseCar implements Flap {
 
+    private GeneralFlap flap;
     private int flapAngle;
     private boolean currentlyMoving;
+
     public Scania() {
         super(2, Color.blue, 220, "Scania", 0.0, 0.0, 0.0);
-        this.flapAngle = 0;
+        this.flap = new GeneralFlap(70);
         this.currentlyMoving = false;
     }
 
+    public void setFlapAngle(int angle) {
+        this.flapAngle = angle;
+    }
+
     public double getFlapAngle() {
-        return flapAngle;
+        return flap.getFlapAngle();
     }
 
     public void raiseFlap() {
         if (!currentlyMoving) {
-            flapAngle = Math.min(flapAngle + 10, 70);
+            flap.raiseFlap();
         }
     }
 
     public void lowerFlap() {
         if (!currentlyMoving) {
-            flapAngle = Math.max(flapAngle - 10, 0);
+            flap.lowerFlap();
         }
     }
 
     private boolean isFlapDown() {
-        if (flapAngle == 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return flap.getFlapAngle() == 0;
     }
 }
+
